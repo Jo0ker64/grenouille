@@ -4,11 +4,9 @@ header{
 	position:absolute;
 	height:88px;
 	width:100%;
-	
 }
 body{
 	background:#26516f url(imgs/bg.png) repeat-y center 88px;
-	
 	margin:0;
 }
 canvas{
@@ -20,7 +18,6 @@ canvas{
 }
 footer{
 	margin:0 auto;
-	;
 	height:167px;
 	width:370px;
 }
