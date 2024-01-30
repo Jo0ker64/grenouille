@@ -122,7 +122,7 @@ function Frog(){
     }
 }
 
-function WaterLily(){
+function WaterLily(x, y){
     this.x = x;
     this.y = y;
     this.state = false;
