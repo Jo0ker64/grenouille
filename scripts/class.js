@@ -146,6 +146,162 @@ function WaterLily(x, y){
     }
 }
 
+// Structure Line
+//     vitesse
+//     direction
+//     largeur
+//     type
+// Fin Structure
+
+// Structure Obj
+//     x
+//     y
+//     ligne
+
+//     Fonction enCollision(frog)
+//         Si frog.x + 25 >= this.x ET frog.x + 5 <= (this.x + this.ligne.largeur) Alors
+//             Retourner Vrai
+//         Sinon
+//             Retourner Faux
+//         Fin Si
+//     Fin Fonction
+    
+//     Fonction deplacement()
+//         Si this.ligne.direction == 1 Alors
+//             Si this.x > 650 Alors
+//                 this.x = -(this.ligne.largeur * 3)
+//             Sinon
+//                 this.x = this.x + (this.ligne.vitesse * this.ligne.direction)
+//             Fin Si
+//         Sinon
+//             Si this.x < -this.ligne.largeur Alors
+//                 this.x = 650 + (this.ligne.largeur * 3)
+//             Sinon
+//                 this.x = this.x + (this.ligne.vitesse * this.ligne.direction)
+//             Fin Si
+//         Fin Si
+//     Fin Fonction
+// Fin Structure
+
+// Structure Frog
+//     x
+//     y
+//     etat
+//     degre
+
+//     Fonction blocage()
+//         this.etat = Faux
+//     Fin Fonction
+
+//     Fonction deblocage()
+//         this.etat = Vrai
+//     Fin Fonction
+
+//     Fonction nEstPasBloque()
+//         Retourner this.etat
+//     Fin Fonction
+
+//     Fonction monter()
+//         Si this.etat == Vrai Alors
+//             Si this.y > 20 Alors
+//                 this.y = this.y - 30
+//             Fin Si
+//             this.degre = 0
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction descendre()
+//         Si this.etat == Vrai Alors
+//             Si this.y == 170 Alors
+//                 Si this.x > 310 Alors
+//                     Tant que (this.x - 10) % 30 != 0 Faire
+//                         this.x--
+//                     Fin Tant que
+//                 Sinon
+//                     Tant que (this.x - 10) % 30 != 0 Faire
+//                         this.x++
+//                     Fin Tant que
+//                 Fin Si
+//             Fin Si
+//             Si this.y < 380 Alors
+//                 this.y = this.y + 30
+//             Fin Si
+//             this.degre = 180
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction allerGauche()
+//         Si this.etat == Vrai Alors
+//             Si this.x > 10 Alors
+//                 this.x = this.x - 30
+//             Fin Si
+//             this.degre = -90
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction allerDroite()
+//         Si this.etat == Vrai Alors
+//             Si this.x < 610 Alors
+//                 this.x = this.x + 30
+//             Fin Si
+//             this.degre = 90
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction initialiserPosition()
+//         this.deblocage()
+//         this.x = 310
+//         this.y = 380
+//         this.degre = 0
+//     Fin Fonction
+
+//     Fonction estDehors()
+//         Si this.x <= 0 OU this.x >= 620 Alors
+//             Retourner Vrai
+//         Sinon
+//             Retourner Faux
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction deplacement(vitesse, direction)
+//         Si this.etat == Vrai Alors
+//             this.x = this.x + (vitesse * direction)
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction cacher()
+//         this.blocage()
+//         this.x = -30
+//         this.y = -30
+//     Fin Fonction
+// Fin Structure
+
+// Structure WaterLily
+//     x
+//     y
+//     etat
+
+//     Fonction estUtilisee()
+//         Retourner this.etat
+//     Fin Fonction
+
+//     Fonction contient(frog)
+//         // ! = différent(l'inverse de la fonction ou réponse)
+//         Si frog.x >= this.x ET (frog.x + 30) <= (this.x + 86) ET NON this.estUtilisee() Alors
+//             Retourner Vrai
+//         Sinon
+//             Retourner Faux
+//         Fin Si
+//     Fin Fonction
+
+//     Fonction marquerUtilisee()
+//         this.etat = Vrai
+//     Fin Fonction
+
+//     Fonction marquerNonUtilisee()
+//         this.etat = Faux
+//     Fin Fonction
+// Fin Structure
 
 // class Line {
 //     constructor(speed, dir, width, type) {
