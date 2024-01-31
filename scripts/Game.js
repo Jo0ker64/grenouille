@@ -41,9 +41,9 @@ function LaunchGame() {
         };
         imgs[i].src = "imgs/img_" + i + ".gif";
     }
-    function setTimer() {
+    function setTimer(){
         time = 60;
-        interval = setInterval(function () {
+        interval = setInterval(function(){
             if (time == 0) {
                 playSound(bell_sound);
                 loseLife();
@@ -58,6 +58,25 @@ function LaunchGame() {
     };
 
     function loseLife() {
+        anim_time = 0;
+        if( frog.isNotBlocked()){
+            frog.block(); 
+            life_count --;
+            clearInterval(interval);
+            if(life_count == 0){
+                alert ("perdu");
+            }
+            else {
+                message_state = 1;
+                last_y = 380; 
+                setTimer(function (){
+                    frog.initPos();
+                    last_y = 380; 
+                    setTimer();
+                    message_state = 0;
+                }, 2000)
+            }
+        }
 
     };
 
@@ -73,9 +92,9 @@ function LaunchGame() {
 
     let line6 = new Line(Math.floor((Math.random() * 3) + 1), 1, 117, 6);
     let line7 = new Line(Math.floor((Math.random() * 3) + 1), -1, 180, 7);
-    let line8 = new Line(Math.floor((Math.random() * 3) + 1), -1, 84, 8);
+    let line8 = new Line(Math.floor((Math.random() * 3) + 1), 1, 84, 8);
     let line9 = new Line(Math.floor((Math.random() * 3) + 1), -1, 180, 7);
-    let line10 = new Line(Math.floor((Math.random() * 3) + 1), -1, 117, 8);
+    let line10 = new Line(Math.floor((Math.random() * 3) + 1), 1, 117, 8);
 
     let enms = new Array;
     enms[0] = new Obj(50, 350, line1);
@@ -150,7 +169,7 @@ function LaunchGame() {
         else {
             //gestion des collisions
             if (frog.y <= 350 && frog.y > 230) {
-                for (let i = 0; i < emms.length; i++) {
+                for (let i = 0; i < enms.length; i++) {
                     if (enms[i].y == frog.y) {
                         if (enms[i].inCollision(frog)) {
                             playSound(hit_sound);
@@ -160,11 +179,11 @@ function LaunchGame() {
                     }
                 }
             }
-            else if (frog.y <= 170 && frog.y >= 50) {
+            else if (frog.y <= 170 && frog.y >= 50){
                 line = null;
-                for (let i = 0; i < plts.length; i++) {
-                    if (plts[i].y = frog) {
-                        if (plts[i].inCollision(frog)) {
+                for (let i = 0; i < plts.length; i++){
+                    if (plts[i].y == frog.y){
+                        if (plts[i].inCollision(frog)){
                             line = plts[i].line
                         }
                     }
@@ -183,7 +202,7 @@ function LaunchGame() {
             }
             else if (frog.y == 20) {
                 let flag = false;
-                for (let i = 0 < wls.length; i++;) {
+                for (let i = 0; i < wls.length; i++) {
                     if (wls[i].contains(frog)) {
                         wls[i].setUsed();
                         flag = true;
@@ -247,7 +266,63 @@ function LaunchGame() {
             ctx.strokeText("time : " + time + " s", 520, 435);
             ctx.fillText("time : " + time + " s", 520, 435);
 
+            ctx.strokeStyle = "#a83f00";
+            ctx.fillStyle = "#ecd729";
+            ctx.font = "12pt comic sans ms";
+            ctx.strokeText("life :", 40, 435);
+            ctx.fillText("life :", 40, 435);
+                for (let i =0; i < life_count; i++){
+                    ctx.drawImage(imgs [20], 110 + (i*30), 417);
+                }
+            
+            ctx.strokeText("score:", 274, 435);   
+            ctx.fillText("score:", 274, 435); 
+            ctx.fill = "#3eb8800";
+            ctx.strokeStyle = "#102300";
+            ctx.lineWidth = 5;
+            ctx.font = "14pt comic sans ms";
+            ctx.strokeText(score, 335, 437);
+            ctx.fillText(score, 335, 437);
 
+            //les voitures
+            for (let i = 0; i < enms.length; i++){
+                enms[i].move();
+                ctx.drawImage(imgs[enms[i].line.type], enms[i].x, enms[i].y)
+            }
+             
+            // les buches
+            for (let i = 0; i < plts.length; i++){
+                plts[i].move();
+                ctx.drawImage(imgs[plts[i].line.type], plts[i].x, plts[i].y)
+            }
+            for (let i = 0; i <wls.length; i++){
+                if (wls[i].isUsed()){
+                    ctx.drawImage(imgs[10], wls[i].x, wls[i].y);   
+                } else {
+                    ctx.drawImage(imgs[9], wls[i].x, wls[i].y);
+                }
+            }
+            if (!frog.isNotBlocked()){
+                if (frog.y <=170 && frog >= 50 && time > 0){
+                    ctx.drawImage(imgs[18], frog.x, frog.y);
+                } else if (frog.y <= 350 && frog.y >= 230 && time >0){
+                    ctx.drawImage(imgs[19], frog.x, frog.y);
+                }else {
+                    ctx.drawImage(imgs[11], frog.x, frog.y);
+                }
+            }
+            if (frog.isNotBlocked()){
+                ctx.save();
+                ctx.translate(frog.x + 15, frog.y + 15);
+                ctx.rotate(frog.deg * Math.PI  / 180);
+                if(anim_time == 0){
+                    ctx.drawImage(imgs[0], -15, -15);
+                } else {
+                    ctx.drawImage(imgs[12], -15, -15);
+                    anim_time --;
+                }
+                ctx.restore();
+            }
         }
     };
 
