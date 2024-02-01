@@ -157,7 +157,6 @@ function LaunchGame() {
             ctx.strokeText("loading" + loading + "%", 275, 255);
             ctx.fillText("loading" + loading + "%", 275, 255);
             if (loading == 100) {
-                ;
                 ctx.lineWidth = 5;
                 ctx.strokeStyle = ("#819AAB");
                 ctx.fillStyle = ("#fff");
@@ -274,7 +273,7 @@ function LaunchGame() {
                 for (let i =0; i < life_count; i++){
                     ctx.drawImage(imgs [20], 110 + (i*30), 417);
                 }
-            
+        
             ctx.strokeText("score:", 274, 435);   
             ctx.fillText("score:", 274, 435); 
             ctx.fill = "#3eb8800";

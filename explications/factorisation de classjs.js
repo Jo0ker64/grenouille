@@ -16,7 +16,8 @@ class Obj {
         return frog.x + 25 >= this.x && frog.x + 5 <= this.x + this.line.width;
     }
     move() {
-        if (this.line.dir == 1) {
+        if (this.line.dir == 1) 
+        {
             this.x = (this.x > 650) ? -(this.line.width * 3) : this.x + (this.line.speed * this.line.dir);
         } else {
             this.x = (this.x < -this.line.width) ? 650 + (this.line.width * 3) : this.x + (this.line.speed * this.line.dir);
